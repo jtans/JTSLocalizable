@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'JTSLocalizable'
   s.version          = '0.1.0'
-s.summary          = 'a easy framework to Localizable strings.'
+  s.summary          = 'a easy framework to Localizable strings.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -24,7 +24,7 @@ a easy framework to Localizable strings.use it in your app is simple.
   s.homepage         = 'https://github.com/jtans/JTSLocalizable'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'jtans@qq.com' => 'jtans@qq.com' }
+  s.author           = { 'jtans' => 'jtans' }
   s.source           = { :git => 'https://github.com/jtans/JTSLocalizable.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/jtans'
 
