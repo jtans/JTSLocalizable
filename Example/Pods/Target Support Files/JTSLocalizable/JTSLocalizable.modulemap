@@ -1,0 +1,6 @@
+framework module JTSLocalizable {
+  umbrella header "JTSLocalizable-umbrella.h"
+
+  export *
+  module * { export * }
+}

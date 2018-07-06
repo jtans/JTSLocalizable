@@ -1,0 +1,6 @@
+framework module Pods_JTSLocalizable_Example {
+  umbrella header "Pods-JTSLocalizable_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}

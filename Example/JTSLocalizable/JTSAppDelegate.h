@@ -7,8 +7,9 @@
 //
 
 @import UIKit;
+#import <JTSLocalizable/JTSLocalizable.h>
 
-@interface JTSAppDelegate : UIResponder <UIApplicationDelegate>
+@interface JTSAppDelegate : UIResponder <UIApplicationDelegate, JTSLocalizableDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 

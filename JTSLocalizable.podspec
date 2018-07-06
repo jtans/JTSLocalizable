@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'JTSLocalizable'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of JTSLocalizable.'
+s.summary          = 'a easy framework to Localizable strings.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,15 +18,15 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+a easy framework to Localizable strings.use it in your app is simple.
                        DESC
 
-  s.homepage         = 'https://github.com/jtans@qq.com/JTSLocalizable'
+  s.homepage         = 'https://github.com/jtans/JTSLocalizable'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'jtans@qq.com' => 'jtans@qq.com' }
-  s.source           = { :git => 'https://github.com/jtans@qq.com/JTSLocalizable.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.source           = { :git => 'https://github.com/jtans/JTSLocalizable.git', :tag => s.version.to_s }
+  # s.social_media_url = 'https://twitter.com/jtans'
 
   s.ios.deployment_target = '8.0'
 
@@ -37,6 +37,6 @@ TODO: Add long description of the pod here.
   # }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  # s.frameworks = 'UIKit'
+
 end
