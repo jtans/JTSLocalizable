@@ -22,7 +22,7 @@ pod 'JTSLocalizable'
 
 ## Author
 
-jtans@qq.com, jtans@qq.com
+jtans
 
 ## License
 
