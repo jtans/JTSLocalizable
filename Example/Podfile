@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'JTSLocalizable_Example' do
+  pod 'JTSLocalizable', :path => '../'
+
+  target 'JTSLocalizable_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
