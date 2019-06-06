@@ -11,6 +11,7 @@
 #endif
 
 #import "JTSLocalizable.h"
+#import "JTSLocalizeManager.h"
 
 FOUNDATION_EXPORT double JTSLocalizableVersionNumber;
 FOUNDATION_EXPORT const unsigned char JTSLocalizableVersionString[];

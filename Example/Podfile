@@ -2,7 +2,7 @@ use_frameworks!
 
 target 'JTSLocalizable_Example' do
   pod 'JTSLocalizable', :path => '../'
-  pod 'AFNetworking', '~> 3.2.1'
+  pod 'AFNetworking'
 
   target 'JTSLocalizable_Tests' do
     inherit! :search_paths

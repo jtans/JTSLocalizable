@@ -14,20 +14,25 @@ PODS:
   - AFNetworking/Serialization (3.2.1)
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
-  - JTSLocalizable (0.1.0)
+  - JTSLocalizable (1.0.0):
+    - AFNetworking
 
 DEPENDENCIES:
-  - AFNetworking (~> 3.2.1)
+  - AFNetworking
   - JTSLocalizable (from `../`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - AFNetworking
 
 EXTERNAL SOURCES:
   JTSLocalizable:
-    :path: ../
+    :path: "../"
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
-  JTSLocalizable: 531521a99ead7271ac583327f913aea6dfb58760
+  JTSLocalizable: 54b2640c7d786123358c29d0c6c695c0a0021e5d
 
-PODFILE CHECKSUM: 4d61eaed3d269fd28a7b29533f2e73fbf3e50310
+PODFILE CHECKSUM: 1edd4812efd835a897126bb092bd5a930407fe4f
 
-COCOAPODS: 1.3.1
+COCOAPODS: 1.5.3

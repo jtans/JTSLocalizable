@@ -7,33 +7,15 @@
 //
 
 #import "JTSAppDelegate.h"
-#import <AFNetworking/AFNetworking.h>
+#import <JTSLocalizable/JTSLocalizable.h>
+#import <JTSLocalizable/JTSLocalizeManager.h>
 
 @implementation JTSAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    //1,set download handler
-    [JTSLocalizable registerDownloadHandler:^NSDictionary *(NSString *url) {
-        __block id response = nil;
-        dispatch_semaphore_t sem = dispatch_semaphore_create(0);
-        dispatch_async(dispatch_get_global_queue(0, 0), ^{
-            [AFHTTPSessionManager.manager GET:url parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
-                NSLog(@"download progress %lld/%lld", downloadProgress.completedUnitCount, downloadProgress.totalUnitCount);
-            } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                response = responseObject;
-                dispatch_semaphore_signal(sem);
-            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                NSLog(@"download error %@", error);
-                dispatch_semaphore_signal(sem);
-            }];
-        });
-        dispatch_semaphore_wait(sem, DISPATCH_TIME_FOREVER);
-        return response;
-    }];
-    
     //2,set delegate to provide url
-    [JTSLocalizable setDelegate:self];
+    [JTSLocalizable setDelegate:[JTSLocalizeManager manager]];
     
     //3,check update localizable strings complete.
     [JTSLocalizable updateIfNeed:^{
@@ -41,15 +23,6 @@
     }];
     
     return YES;
-}
-    
-#pragma mark - JTSLocalizableDelegate
-- (NSString *)jts_urlVersion {
-    return [NSString stringWithFormat:@"http://7fvjpr.com1.z0.glb.clouddn.com/JTSLocalizable_version.json?v=%f",[NSDate timeIntervalSinceReferenceDate]];
-}
-    
-- (NSString *)jts_urlLocalizable:(NSLocale *)currentLocale {
-    return [NSString stringWithFormat:@"http://7fvjpr.com1.z0.glb.clouddn.com/Localizable_en.json?v=%f",[NSDate timeIntervalSinceReferenceDate]];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
