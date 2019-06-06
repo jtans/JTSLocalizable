@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'JTSLocalizable'
-  s.version          = '0.1.1'
+  s.version          = '1.0.0'
   s.summary          = 'a easy framework to Localizable strings.'
 
 # This description is used to generate tags and improve search results.
@@ -38,5 +38,6 @@ a easy framework to Localizable strings.use it in your app is simple.
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit'
+  s.dependency 'AFNetworking'
 
 end
