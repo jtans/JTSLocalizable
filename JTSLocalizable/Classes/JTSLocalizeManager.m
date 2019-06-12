@@ -17,10 +17,19 @@
             __block id response = nil;
             dispatch_semaphore_t sem = dispatch_semaphore_create(0);
             dispatch_async(dispatch_get_global_queue(0, 0), ^{
-                [AFHTTPSessionManager.manager GET:url parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
+                AFHTTPSessionManager *_manager = [AFHTTPSessionManager manager];
+                _manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+                _manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+                
+                [_manager GET:url parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
                     NSLog(@"download progress %lld/%lld", downloadProgress.completedUnitCount, downloadProgress.totalUnitCount);
                 } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                    response = responseObject;
+                    if ([responseObject isKindOfClass:[NSData class]]) {
+                        NSError *error;
+                        response = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:&error];
+                    } else {
+                        response = responseObject;
+                    }
                     dispatch_semaphore_signal(sem);
                 } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                     NSLog(@"download error %@", error);
@@ -47,7 +56,7 @@
     static NSString *rs = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        NSString *idn =  [[NSBundle mainBundle] objectForInfoDictionaryKey:kCFBundleIdentifierKey];
+        NSString *idn =  [[NSBundle mainBundle] bundleIdentifier];
         NSData *data = [idn dataUsingEncoding:NSUTF8StringEncoding];
         NSString *base64 = [data base64EncodedStringWithOptions:0];
         rs = base64;
