@@ -57,13 +57,13 @@
 
 #pragma mark - JTSLocalizableDelegate
 - (NSString *)jts_urlVersion {
-    return [NSString stringWithFormat:@"https://github.com/jtans/langs/%@/version.json?v=%f",
+    return [NSString stringWithFormat:@"https://raw.githubusercontent.com/jtans/langs/master/%@/version.json?v=%f",
             [self bundleIdBase64],
             [NSDate timeIntervalSinceReferenceDate]];
 }
 
 - (NSString *)jts_urlLocalizable:(NSLocale *)currentLocale {
-    return [NSString stringWithFormat:@"https://github.com/jtans/langs/%@/%@.json?v=%f",
+    return [NSString stringWithFormat:@"https://raw.githubusercontent.com/jtans/langs/master/%@/%@.json?v=%f",
             [self bundleIdBase64],
             [currentLocale objectForKey:NSLocaleLanguageCode],
             [NSDate timeIntervalSinceReferenceDate]];
