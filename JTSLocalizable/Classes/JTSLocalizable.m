@@ -39,6 +39,54 @@ static NSString *kJTSLocalizableVersion = @"kJTSLocalizableVersion";
     [self shared].downloadHandler = downloadHandler;
 }
 
+static NSComparisonResult jts_versionCompare(NSString *ver1, NSString *ver2) {
+    ver1 = @"1.0.0.0.110";
+    if ([ver1 isEqualToString:ver2]) {
+        return NSOrderedSame;
+    }
+    /*
+     *  1  1.1
+     *  1.0  1.0.1
+     */
+    NSArray *ver1Sections = [ver1 componentsSeparatedByString:@"."];
+    NSArray *ver2Sections = [ver2 componentsSeparatedByString:@"."];
+    uint8_t maxSectionCount = MAX(ver1Sections.count, ver2Sections.count);
+    
+    //fill sections
+    for (int i = 0; i < 2; i++) {
+        NSMutableArray *temp = [NSMutableArray arrayWithCapacity:maxSectionCount];
+        NSArray *src = i == 0 ? ver1Sections : ver2Sections;
+        [temp addObjectsFromArray:src];
+        for (int j = (int)src.count; j < maxSectionCount; j++) {
+            [temp addObject:@(0)];
+        }
+        if (i == 0) {
+            ver1Sections = [temp copy];
+        } else {
+            ver2Sections = [temp copy];
+        }
+    }
+    
+    //compare
+    NSUInteger(^calcVersion)(NSArray *) = ^(NSArray *vers) {
+        NSUInteger val = 0;
+        for (uint8_t i = 0; i < vers.count; i++) {
+            val += [vers[i] integerValue] * pow(10, maxSectionCount - i);
+        }
+        return val;
+    };
+    
+    NSUInteger ver1Value = calcVersion(ver1Sections);
+    NSUInteger ver2Value = calcVersion(ver2Sections);
+    if (ver1Value == ver2Value) {
+        return NSOrderedSame;
+    }
+    if (ver1Value < ver2Value) {
+        return NSOrderedAscending;
+    }
+    return NSOrderedDescending;
+}
+
 + (void)updateIfNeed:(void (^)(void))completeBlock {
     if (![self shared].downloadHandler) {
         @throw [NSException exceptionWithName:[NSString stringWithFormat:@"%@", [self class]] reason:@"downloadHandler not set" userInfo:nil];
@@ -71,7 +119,8 @@ return;
         }
         
         NSString *currentAppversion = [[NSBundle mainBundle].infoDictionary objectForKey:@"CFBundleShortVersionString"];
-        if (![appVersion isKindOfClass:[NSString class]] || ![appVersion isEqualToString:currentAppversion]) {
+        //skip appVersion < currentAppversion
+        if (![appVersion isKindOfClass:[NSString class]] || jts_versionCompare(appVersion, currentAppversion) == NSOrderedAscending) {
             Done
             return;
         }
