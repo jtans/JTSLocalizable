@@ -40,7 +40,6 @@ static NSString *kJTSLocalizableVersion = @"kJTSLocalizableVersion";
 }
 
 static NSComparisonResult jts_versionCompare(NSString *ver1, NSString *ver2) {
-    ver1 = @"1.0.0.0.110";
     if ([ver1 isEqualToString:ver2]) {
         return NSOrderedSame;
     }
