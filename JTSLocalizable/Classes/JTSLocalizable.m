@@ -147,13 +147,11 @@ return;
                 }
                 
                 [localStrings writeToFile:path atomically:YES];
-                Done
-                return;
             }
         } else {//load from cache
             [self shared].localizables = [[NSDictionary alloc] initWithContentsOfFile:[self currentCacheLocalURL:version]];
-            Done;
         }
+        Done;
     });
 }
 
